@@ -1,5 +1,3 @@
-$fn=36;
-
 /**
 * cut a model in half, removing the +x portion
 */
@@ -59,7 +57,7 @@ module hole(d, r, draft=0, trans=[0,0,0], rot=[0,0,0]){
           top_r=r+(d/sin(opp_ang)*sin(draft));
           cylinder(h=d, r1=top_r, r2=r);
         } else {
-          cylinder(h=d, r1=r, r2=r);
+          cylinder(h=d, r=r);
         }
       }
     }

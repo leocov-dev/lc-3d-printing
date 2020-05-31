@@ -1,4 +1,4 @@
-include <../lib_utils.scad>
+include <../lib/lib_utils.scad>
 ///////////////////////////////////////////////////////////
 // insert for desks with wire retention
 //
@@ -21,7 +21,7 @@ INTERF=0.33;  // in mm
 WIRE_RAD=4;  // in mm
 WIRE_SEP=30;  // in deg
 WIRE_FILLET=1;
-WIRE_COUNT=0;
+WIRE_COUNT=3;
 
 
 module angle_disc(h, r) {
