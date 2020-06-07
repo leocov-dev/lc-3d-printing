@@ -1,3 +1,4 @@
-*.stl
+.idea/
+
 *.gcode
 *.3mf
