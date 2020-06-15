@@ -1,4 +1,6 @@
 .idea/
 
+*.stl
+!raspberry_pi_1u_rack/ref/pi*.stl
 *.gcode
 *.3mf
