@@ -1,6 +1,6 @@
 include <../lib/BOSL2/std.scad>
 
-$fn = 32;
+$fn = 24;
 //path points coordinates (from a javascript program)
 p = [
 [20.625, 20.625],
@@ -4101,10 +4101,10 @@ R = 18 / 2;
 R2 = R + 2;
 
 //initial height
-H0 = 11.5;
+H0 = 14;
 
 //slope of ramp
-kH = 2.15;
+kH = 2;
 
 L = 62;
 //L = 30;
@@ -4164,8 +4164,8 @@ module make(p) {
 
       bar(p[0][0], p1, H0-1, p0, p1, H0-1.75, R+0.2, R+0.2);
       slope(p[0][0], p1, H0-1, p0, p1, H0-1.75, R2+0.2, R2+0.2);
-      bar(p0, p1, H0-2, p0, p1+end, H0-2.25, R+0.2, R+0.2);
-      slope(p0, p1, H0-2, p0, p1+end, H0-2.25, R2+0.2, R2+0.2);
+      bar(p0, p1, H0-2, p0, p1+end, H0-2.5, R+0.2, R+0.2);
+      slope(p0, p1, H0-2, p0, p1+end, H0-2.5, R2+0.2, R2+0.2);
     }
   }
 }
