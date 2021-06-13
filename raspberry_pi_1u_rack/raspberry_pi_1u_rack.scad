@@ -57,7 +57,7 @@ module footprint() {
     _half = 49 / 2;
     xflip_copy() move_copies([[_half, 0, 0], [_half, 58, 0]]) standoff(h = _h, interf=HOLE_INTERF);
 
-    translate([0, 19, _h]) pi();
+    translate([0, 19, _h]) pi(3);
   }
 }
 module standoff(h, interf = 0.1) {
