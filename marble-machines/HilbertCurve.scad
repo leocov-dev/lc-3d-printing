@@ -1,6 +1,7 @@
 include <../lib/BOSL2/std.scad>
 
 $fn = 24;
+
 //path points coordinates (from a javascript program)
 p = [
 [20.625, 20.625],
