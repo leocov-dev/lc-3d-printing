@@ -1,7 +1,6 @@
 // Remixed from MiseryBot's original work: http://www.thingiverse.com/thing:8063
 
-$fn = 60;  //Working
-//$fn=720;  //Show off
+$fn = 60;
 fan(50, 15, 40);
 
 module fan(width, depth, mount, mount_diameter = 3.4, blade_angle = - 45)

@@ -2,9 +2,7 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
-
 INTERF = 0.4;
-
 MIN_HEIGHT=10;
 
 module SandFunnel(d1=10, d2=30, h=100, wall=2.5) {
@@ -24,7 +22,7 @@ module SandFunnel(d1=10, d2=30, h=100, wall=2.5) {
     attach(TOP)
     cylinder(d=d2, h=wall);
 
-    left(d2)
+    right(d2)
     up(h-(h*0.65))
     scale([1,1,3])
     sphere(d=d2*5, anchor=BOTTOM);

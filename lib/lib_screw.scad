@@ -21,4 +21,4 @@ module slot_screw(hole_d, hole_l, nut, nut_h, cap) {
 }
 
 //screw(1, 3, 5, 5);
-slot_screw(1, 10, 5, 2, 5);
+//slot_screw(1, 10, 5, 2, 5);
