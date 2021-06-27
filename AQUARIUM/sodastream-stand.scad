@@ -2,7 +2,7 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
-INTERF = 0.6;
+INTERF = 1.0;
 WALL=3;
 
 FOOT_FAC=2.5;

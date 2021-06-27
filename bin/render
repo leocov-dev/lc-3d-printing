@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+wDir=$(dirname "${BASH_SOURCE[0]}")
+
+function build() {
+   make -C "$wDir/../_util/go-scad-render"
+}
+
+if [[ ${BUILD:-"false"} == "true" ]]; then
+   build
+fi
+
+scad_render_cmd="$wDir/../_util/go-scad-render/bin/scad-render"
+
+if [[ ! -f "$scad_render_cmd" ]]; then
+  build
+fi
+
+# shellcheck disable=SC2068
+$scad_render_cmd $@
