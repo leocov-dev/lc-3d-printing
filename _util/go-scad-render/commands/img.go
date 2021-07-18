@@ -15,7 +15,7 @@ import (
 var (
 	imgCmd = &cobra.Command{
 		Use:   "img <directory>",
-		Short: "Render as images",
+		Short: "Render images for scad files",
 		Run:   run,
 		Args:  imgArgs(),
 	}

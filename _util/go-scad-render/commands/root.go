@@ -11,7 +11,7 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		Use: config.Name,
-		Long: fmt.Sprintf("%s %s\nRender OpenSCAD files as stl or png",
+		Long: fmt.Sprintf("%s %s\nRender OpenSCAD files in various formats",
 			config.Name,
 			config.Version),
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

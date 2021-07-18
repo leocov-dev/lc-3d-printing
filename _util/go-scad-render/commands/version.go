@@ -8,7 +8,7 @@ import (
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version number",
+	Short: "Print version number",
 	Run: func(cmd *cobra.Command, args []string) {
 		if config.Version == "" {
 			config.Version = "v0.0.0-dev"

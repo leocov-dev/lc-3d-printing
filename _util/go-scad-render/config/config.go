@@ -9,7 +9,7 @@ import (
 
 var (
 	Version     string // NOTE: set by build args
-	Name        = "go-scad-render"
+	Name        = "scad-render"
 	PngTemplate = `{{.Dir}}{{.Filename}}.scad --autocenter --viewall --imgsize {{.ImgSize}},{{.ImgSize}} --render --o {{.Dir}}{{.Filename}}.png -D '$fn={{.Precision}}'`
 	StlTemplate = `{{.Dir}}{{.Filename}}.scad --autocenter --viewall --render --o {{.Dir}}stl/{{.Filename}}.stl -D '$fn={{.Precision}}'`
 	ExecDir, _  = os.Getwd()
