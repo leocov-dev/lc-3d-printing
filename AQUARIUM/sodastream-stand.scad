@@ -41,6 +41,8 @@ module SodastreamStand() {
 
     up(WALL)
     cylinder(d = dia + INTERF, h = height);
+
+    cylinder(d = dia/2, h = height);
   }
 }
 

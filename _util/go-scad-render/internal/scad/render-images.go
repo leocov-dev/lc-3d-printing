@@ -1,51 +1,102 @@
 package scad
 
 import (
+	"errors"
+	"fmt"
+	"github.com/gosuri/uiprogress"
 	"github.com/leocov-dev/go-scad-render/config"
 	"github.com/leocov-dev/go-scad-render/internal/utils"
-	"path"
+	concurrent_pool "github.com/leocov-dev/go-scad-render/pkg/concurrent_tasks"
+	"os/exec"
 	"strings"
 	"text/template"
+	"time"
 )
 
 type ImgTemplateData struct {
 	Filename  string
-	ImgSize   int
+	ImgSize   uint
 	Dir       string
-	Precision int8
+	Precision uint8
 }
 
-func RenderImages(scadFiles []string) error {
+func execOpenScadRender(file File, size uint, precision uint8) error {
 
-	cmdTemplate, err := template.New("png").Parse(config.PngTemplate)
+	time.Sleep(1 * time.Second)
+
+	cmd := exec.Command(
+		"openscad",
+		file.FullPath,
+		"--render",
+		"--autocenter",
+		"--viewall",
+		"--imgsize",
+		fmt.Sprintf("%d,%d", size, size),
+		"-D",
+		fmt.Sprintf("$fn=%d", precision),
+		"-o",
+		fmt.Sprintf("%s%s.png", file.Dir, file.Filename),
+	)
+	err := cmd.Run()
 	if err != nil {
-		return err
+		return errors.New(fmt.Sprintf("%s: %s", file.Filename, err.Error()))
+	}
+	return nil
+}
+
+func RenderImages(scadFiles []*File, size uint, precision uint8, progressBar *uiprogress.Bar) ([]string, error) {
+
+	argsTemplate, err := template.New("png").Parse(config.PngTemplate)
+	if err != nil {
+		return nil, err
 	}
 
-	var cmds []string
+	var argsList []string
 
 	for _, sf := range scadFiles {
-		dir, file := path.Split(sf)
-		filename := strings.TrimSuffix(file, path.Ext(file))
-
 		scadImage := ImgTemplateData{
-			filename,
-			512,
-			dir,
-			32,
+			sf.Filename,
+			size,
+			sf.Dir,
+			precision,
 		}
 		var buf strings.Builder
-		err = cmdTemplate.Execute(&buf, scadImage)
+		err = argsTemplate.Execute(&buf, scadImage)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
-		cmds = append(cmds, buf.String())
+		argsList = append(argsList, buf.String())
 	}
 
 	if config.DebugMode {
-		utils.WriteMain("Commands to Run", "\n"+strings.Join(cmds, "\n"))
+		fmt.Println("\n------")
+		utils.WriteMain("Commands to Run", "\n"+strings.Join(argsList, "\n"))
+		fmt.Println("------\n")
 	}
 
-	return nil
+	procPool := concurrent_pool.NewPool(config.ConcurrencyLimit, true)
+
+	for _, scad := range scadFiles {
+		s := *scad
+		proc := concurrent_pool.NewProc(
+			func() error {
+				return execOpenScadRender(s, size, precision)
+			},
+			func() {
+				if progressBar != nil {
+					progressBar.Incr()
+				}
+			},
+			nil,
+			config.CTX,
+			config.CancelRender,
+		)
+
+		procPool.Add(proc)
+	}
+
+	saveErrors := procPool.Process()
+
+	return saveErrors, nil
 }

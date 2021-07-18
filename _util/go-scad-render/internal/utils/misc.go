@@ -54,12 +54,14 @@ func CloseHandlerWithCallback(cb func()) {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		time.Sleep(1 * time.Second)
+
 		<-c
+
 		if runtime.GOOS != "windows" {
 			// makes the cursor visible
 			fmt.Print("\033[?25h")
 		}
-		fmt.Println("\rCtrl+C pressed in Terminal")
+		fmt.Println("\rCtrl+C pressed in Terminal\n ")
 		cb()
 		time.Sleep(1 * time.Second)
 		os.Exit(0)

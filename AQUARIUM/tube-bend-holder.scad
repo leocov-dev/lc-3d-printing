@@ -5,7 +5,7 @@ $fn = 100;
 
 INTERF = 0.4;
 
-pegLens = [0.5, 2.25, 2.75, 1];
+pegLens = [0.5, 2.25, 2.25, 1.5];
 pegHeight = pegLens[0]+pegLens[1]+pegLens[2]+pegLens[3];
 
 module straightSection(d, wall, l, flatEnds=false) {
@@ -134,7 +134,7 @@ module suctionCupPin() {
   cylinder(d1=7, d2=7.75, h=pegLens[0], anchor=BOTTOM)
     attach(TOP) cylinder(d=7.75, h=pegLens[1], anchor=BOTTOM)
     attach(TOP) cylinder(d=4.8, h=pegLens[2], anchor=BOTTOM)
-    attach(TOP) cylinder(d1=4.8, d2=6, h=pegLens[3], anchor=BOTTOM);
+    attach(TOP) cylinder(d1=4.8, d2=7.5, h=pegLens[3], anchor=BOTTOM);
 }
 
 module suctionCupMount(d, arc, arcRad, wall) {
@@ -236,7 +236,7 @@ module BendHolder(tubeDia = 5, bendArc = 90, bendRad = 5, wallThickness = 1, end
 TUBE_DIA=5.5+INTERF;
 WALL_THICKNESS=0.4*3;
 
-BendHolder(TUBE_DIA, 0, 10, WALL_THICKNESS, 8, true);
+BendHolder(TUBE_DIA, 90, 10, WALL_THICKNESS, 8, true);
 
 //left(50)
 //BendHolder(TUBE_DIA, 90, 10, WALL_THICKNESS, 8, true);

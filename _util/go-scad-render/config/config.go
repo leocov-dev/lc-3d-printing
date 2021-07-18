@@ -8,15 +8,21 @@ import (
 )
 
 var (
-	Version     string // set by build args
+	Version     string // NOTE: set by build args
 	Name        = "go-scad-render"
-	PngTemplate = `openscad {{.Filename}}.scad --autocenter --viewall --imgsize {{.ImgSize}},{{.ImgSize}} --render --o {{.Dir}}{{.Filename}}.png -D '$fn={{.Precision}}'`
-	StlTemplate = `openscad {{.Filename}}.scad --autocenter --viewall --render --o {{.Dir}}stl/{{.Filename}}.stl -D '$fn={{.Precision}}'`
+	PngTemplate = `{{.Dir}}{{.Filename}}.scad --autocenter --viewall --imgsize {{.ImgSize}},{{.ImgSize}} --render --o {{.Dir}}{{.Filename}}.png -D '$fn={{.Precision}}'`
+	StlTemplate = `{{.Dir}}{{.Filename}}.scad --autocenter --viewall --render --o {{.Dir}}stl/{{.Filename}}.stl -D '$fn={{.Precision}}'`
 	ExecDir, _  = os.Getwd()
 
-	CTX, CancelRender     = context.WithCancel(context.Background())
+	CancelRender          context.CancelFunc
+	CTX                   context.Context
 	defaultConcurrency    = runtime.NumCPU()
 	ConcurrencyLimit      int
 	ConcurrencyLimitValue = cli.NewConcurrencyValue(defaultConcurrency, &ConcurrencyLimit)
 	DebugMode             bool
+	OnlyRenderMissing     bool
 )
+
+func init() {
+	CTX, CancelRender = context.WithCancel(context.Background())
+}
