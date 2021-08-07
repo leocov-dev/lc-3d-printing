@@ -2,7 +2,7 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
-INTERF = 1.0;
+$interf = 1.0;
 WALL=3;
 
 FOOT_FAC=2.5;
@@ -40,7 +40,7 @@ module SodastreamStand() {
     }
 
     up(WALL)
-    cylinder(d = dia + INTERF, h = height);
+    cylinder(d = dia + $interf, h = height);
 
     cylinder(d = dia/2, h = height);
   }

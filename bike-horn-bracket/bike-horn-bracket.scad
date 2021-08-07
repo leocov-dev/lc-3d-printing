@@ -10,7 +10,7 @@ BRACKET_SPLIT = 0.5;
 
 HORN_SIZE = 12.75;
 
-INTERF = 0.25;
+$interf = 0.25;
 
 
 module humpedRing(id, od) {
@@ -65,20 +65,20 @@ module handlebarBracket(size, part = "top") {
         }
 
         fwd(od / 2)
-        right(INTERF)
-        cylinder(h = BRACKET_WIDTH / 2 - INTERF, d = hg_od, anchor = BACK + TOP, orient = LEFT);
+        right($interf)
+        cylinder(h = BRACKET_WIDTH / 2 - $interf, d = hg_od, anchor = BACK + TOP, orient = LEFT);
 
         up(BRACKET_SPLIT / 2)
         fwd(id / 2)
-        right(INTERF)
-        cube([BRACKET_WIDTH / 2 - INTERF, BRACKET_WIDTH / 2, (hg_od / 2) - (BRACKET_SPLIT / 2)], anchor = BACK + BOTTOM
+        right($interf)
+        cube([BRACKET_WIDTH / 2 - $interf, BRACKET_WIDTH / 2, (hg_od / 2) - (BRACKET_SPLIT / 2)], anchor = BACK + BOTTOM
         +
         LEFT);
       }
 
       fwd(od / 2)
-      right(INTERF)
-      cylinder(h = BRACKET_WIDTH / 2 - INTERF, d = hg_od + (INTERF * 100), anchor = BACK + TOP, orient = RIGHT);
+      right($interf)
+      cylinder(h = BRACKET_WIDTH / 2 - $interf, d = hg_od + ($interf * 100), anchor = BACK + TOP, orient = RIGHT);
     }
   }
 

@@ -3,7 +3,7 @@ include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
 
-INTERF = 0.05;
+$interf = 0.05;
 TH = 2.5;
 
 W = 127;

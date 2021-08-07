@@ -3,7 +3,7 @@ include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
 
-INTERF = 0.4;
+$interf = 0.4;
 
 pegLens = [0.5, 2.25, 2.25, 1.5];
 pegHeight = pegLens[0]+pegLens[1]+pegLens[2]+pegLens[3];
@@ -233,7 +233,7 @@ module BendHolder(tubeDia = 5, bendArc = 90, bendRad = 5, wallThickness = 1, end
   }
 }
 
-TUBE_DIA=5.5+INTERF;
+TUBE_DIA=5.5+$interf;
 WALL_THICKNESS=0.4*3;
 
 BendHolder(TUBE_DIA, 90, 10, WALL_THICKNESS, 8, true);

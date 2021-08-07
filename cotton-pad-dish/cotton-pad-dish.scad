@@ -3,7 +3,7 @@ include <../lib/lib_utils.scad>
 
 $fn = 75;
 
-INTERF = 0.4;
+$interf = 0.4;
 
 PAD_TH = 10;
 PAD_D = 58;
@@ -54,12 +54,12 @@ module grid() {
 module lid() {
   union() {
     difference() {
-      cylinder(h = TH, d = PAD_D + TH - INTERF);
+      cylinder(h = TH, d = PAD_D + TH - $interf);
       cylinder(h = TH, d = PAD_D - (TH * 1.5));
     }
 
     intersection() {
-      cylinder(h = TH, d = PAD_D + TH - INTERF);
+      cylinder(h = TH, d = PAD_D + TH - $interf);
       grid();
     }
   }
@@ -67,7 +67,7 @@ module lid() {
 
 module make() {
   // cotton pad reference
-//  up(4) cylinder(h = 6 - INTERF, d = PAD_D - INTERF);
+//  up(4) cylinder(h = 6 - $interf, d = PAD_D - $interf);
 
 //  up(PAD_TH + TH - 1.5) lid();
 

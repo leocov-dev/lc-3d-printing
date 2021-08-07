@@ -18,7 +18,7 @@ module FluvalAquaskyLifters(lift = 15, rimThickness = 10) {
 
   lipWidth = 1.5;
 
-  footLength = 47;
+  footLength = 47 + ($interf * 2);
   footWidth = rimThickness + $interf;
 
   topLength = footLength + (lipWidth * 2);
@@ -68,8 +68,12 @@ module FluvalAquaskyLifters(lift = 15, rimThickness = 10) {
       zscale(cylScaleFactor)
       ycyl(r = cylinderRadius, h = totalWidth, anchor = RIGHT);
     }
+
+    offsetCut = supportLength / 5.5;
+
+    right(supportLength/2)
+    cube([offsetCut, totalWidth * 2, totalWidth * 10], anchor = CENTER+RIGHT);
   }
 }
 
-
-FluvalAquaskyLifters(20, 12);
+FluvalAquaskyLifters(18, 12);

@@ -3,10 +3,10 @@ include <../lib/lib_utils.scad>
 
 $fn = 75;
 
-INTERF = 0.3;
+$interf = 0.3;
 
-H = 22 + INTERF;
-W = 58.5 + INTERF;
+H = 22 + $interf;
+W = 58.5 + $interf;
 D = 53.5;
 
 WALL_TH = 6;
@@ -49,7 +49,7 @@ module make() {
         // MOUNTING HOLES
         union() {
           right(58.5 / 2) down((H + WALL_TH) / 2) {
-            left(edge + (INTERF / 2)) back(edge + (INTERF / 2))
+            left(edge + ($interf / 2)) back(edge + ($interf / 2))
             cylinder(d = hole, h = WALL_TH * 2, anchor = CENTER) {
               left(sep)
               cylinder(d = hole, h = WALL_TH * 2, anchor = CENTER);
@@ -88,9 +88,9 @@ module make() {
 
     }
 
-    right(edge + (INTERF*2))
+    right(edge + ($interf*2))
     left(58.5 / 2)
-    back(edge + (INTERF / 2))
+    back(edge + ($interf / 2))
     down((H+WALL_TH)/2) cylinder(d = hole * 2.2, h = WALL_TH * 2, anchor = CENTER + TOP);
     back(D / 2) cuboid([200, 42, 20], rounding = 5, edges = [FRONT, BACK], $fn = 2);
   }

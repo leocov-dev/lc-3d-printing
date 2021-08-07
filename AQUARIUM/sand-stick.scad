@@ -3,7 +3,7 @@ include <../lib/BOSL2/std.scad>
 $fn = 100;
 
 DIA = 2.5;
-INTERF = 0.2;
+$interf = 0.2;
 
 module SandStickHandle(d=2.5) {
   thickness=d+2.5;
@@ -54,13 +54,13 @@ module SandStickEnd(d=2.5, w=30) {
   }
 }
 
-SandStickEnd(d=DIA+INTERF, w=20);
+SandStickEnd(d=DIA+$interf, w=20);
 left(10)
-SandStickEnd(d=DIA+INTERF, w=30);
+SandStickEnd(d=DIA+$interf, w=30);
 left(20)
-SandStickEnd(d=DIA+INTERF, w=40);
+SandStickEnd(d=DIA+$interf, w=40);
 
 left(30)
 down(10.8)
 xrot(180)
-SandStickHandle(DIA+INTERF);
+SandStickHandle(DIA+$interf);

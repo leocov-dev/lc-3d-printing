@@ -9,7 +9,7 @@ import (
 type Heading struct {
 	headingLength uint
 	separator     string
-	color         func(a ...interface{}) string
+	color         func(a ...$interface{}) string
 	headingAlign  HeadingAlign
 }
 

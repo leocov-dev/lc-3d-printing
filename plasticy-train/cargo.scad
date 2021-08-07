@@ -2,15 +2,15 @@ use <../lib/lib_utils.scad>
 include <../lib/BOSL2/std.scad>
 
 $fn = 100;
-INTERF = 0.4;
+$interf = 0.4;
 
 module connector_pins_negative() {
-  yflip_copy() back(22.5) cylinder(d=2.5+INTERF, h=3.5+INTERF);
+  yflip_copy() back(22.5) cylinder(d=2.5+$interf, h=3.5+$interf);
 }
 
 module cargo_box() {
   WALL=2;
-  D_OFF=3.5+INTERF+WALL;
+  D_OFF=3.5+$interf+WALL;
 
   difference() {
     cube([21, 95, 22], anchor = BOTTOM);
