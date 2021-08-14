@@ -2,7 +2,7 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
-$interf = 0.6;
+$interf = 0.4;
 
 // All values expressed in millimeters
 ELITE_D = 13;
@@ -10,7 +10,7 @@ ELITE_L = 65;
 
 WALL_THICKNESS = 4;
 
-RIB = 0.6;
+RIB = 0.4;
 
 module clip(w = 20, h = 50, d = 5, th = 2) {
   ANG = 3;
