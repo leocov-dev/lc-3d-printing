@@ -5,7 +5,7 @@ include <../lib/BOSL2/std.scad>
 $fn = 50;
 H_1u = 44;  // 1u is 44.45mm
 W_1u = 17.75 / 0.039370;// 19 inch rack
-HOLE_$interf=0.1;
+HOLE_$slop=0.1;
 
 //reference();
 
@@ -55,12 +55,12 @@ module footprint() {
   back(26.5){
     _h = 2;
     _half = 49 / 2;
-    xflip_copy() move_copies([[_half, 0, 0], [_half, 58, 0]]) standoff(h = _h, $interf=HOLE_$interf);
+    xflip_copy() move_copies([[_half, 0, 0], [_half, 58, 0]]) standoff(h = _h, $slop=HOLE_$slop);
 
     translate([0, 19, _h]) pi(3);
   }
 }
-module standoff(h, $interf = 0.1) {
+module standoff(h, $slop = 0.1) {
   _base_width=2;
   difference() {
     union() {
@@ -72,7 +72,7 @@ module standoff(h, $interf = 0.1) {
       }
     }
 
-    _d_bore = 2.7 + $interf;
+    _d_bore = 2.7 + $slop;
     _h_bore = h * 2;
     translate([0, 0, - (h / 2)]) cylinder(d = _d_bore, h = _h_bore);
   }

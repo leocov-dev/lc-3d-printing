@@ -3,7 +3,7 @@ include <../lib/BOSL2/std.scad>
 
 $fn = 100;
 
-$interf = 0.05;
+$slop = 0.05;
 TH=2;
 
 VALVE_R1 = 11/2;
@@ -14,10 +14,10 @@ module valve_holder() {
 
   difference() {
     union() {
-      tube(h = 15, ir1 = VALVE_R1 + $interf, ir2 = VALVE_R2 + $interf, wall = 2, anchor = BOTTOM);
+      tube(h = 15, ir1 = VALVE_R1 + $slop, ir2 = VALVE_R2 + $slop, wall = 2, anchor = BOTTOM);
 
       up(15)
-      tube(h = 6, ir1 = VALVE_R2 + $interf, ir2 = VALVE_R2 + $interf - 0.5, wall = 2);
+      tube(h = 6, ir1 = VALVE_R2 + $slop, ir2 = VALVE_R2 + $slop - 0.5, wall = 2);
 
 //      back(10)
 //      color("green") prismoid(h = 15, size1 = [7, 7], size2 = [7, 5], shift = [0, 1]);

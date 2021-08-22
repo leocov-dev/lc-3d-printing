@@ -1,6 +1,6 @@
 $fn = 75;
 
-$interf = 0.3;
+$slop = 0.3;
 height = 75;
 radius = 25;
 thickness = 1.75;
@@ -86,9 +86,9 @@ module make_retainer(height, radius) {
   color("Magenta") {
     difference() {
       difference() {
-        cylinder(h = thickness * 5, r = radius - thickness - $interf / 2);
+        cylinder(h = thickness * 5, r = radius - thickness - $slop / 2);
         translate([0, 0, - thickness / 2])
-          cylinder(h = thickness * 6, r = radius - thickness * 2 - $interf / 2);
+          cylinder(h = thickness * 6, r = radius - thickness * 2 - $slop / 2);
       }
       translate([- thickness / 4, radius - thickness * 3, - thickness / 2])
         cube([thickness / 2, thickness * 3, thickness * 6]);
@@ -105,7 +105,7 @@ module make_front(height, radius) {
       difference() {
         union() {
           cylinder(h = cap_height, r = radius);
-          cylinder(h = cap_height + thickness * 3, r = radius - thickness - ($interf / 2));
+          cylinder(h = cap_height + thickness * 3, r = radius - thickness - ($slop / 2));
 
           translate([0, 0, - 5]) {
             minkowski() {
@@ -137,13 +137,13 @@ module make_eye(height, radius) {
   eye_height = height / 8;
 
   color("SteelBlue") {
-    translate([0, 0, height + $interf]) {
+    translate([0, 0, height + $slop]) {
 
       difference() {
         union() {
           cylinder(h = eye_height, r = radius);
           translate([0, 0, - thickness * 2])
-            cylinder(h = eye_height + (thickness * 2), r = radius - thickness - $interf / 2);
+            cylinder(h = eye_height + (thickness * 2), r = radius - thickness - $slop / 2);
 
           translate([0, 0, thickness + (eye_height - thickness * 4)]) {
             minkowski() {
@@ -168,7 +168,7 @@ module make_display(height, radius, count = 3) {
     add_rim = i > 0;
 
     h_offset = (height - (thickness * 5.5)) * i;
-    scaled_rad = radius - ((thickness * 2 + $interf) * i);
+    scaled_rad = radius - ((thickness * 2 + $slop) * i);
 
     translate([0, 0, h_offset]) {
       make_section(height, scaled_rad, add_cap, add_rim);
@@ -188,7 +188,7 @@ module make_for_print(height, radius) {
   separation = radius * 2.8;
 
   // FRONT CAP
-  translate([0, 0, (height / 2) - (thickness * 4) - ($interf / 2)])
+  translate([0, 0, (height / 2) - (thickness * 4) - ($slop / 2)])
     make_front(height, radius);
 
   // FIRST SECTION
@@ -197,19 +197,19 @@ module make_for_print(height, radius) {
 
   // SECOND SECTION
   translate([separation, separation, 0]) {
-    make_section(height, radius - (thickness * 2 + $interf), true, true);
+    make_section(height, radius - (thickness * 2 + $slop), true, true);
     //    translate([separation,0,0])
-    //      make_retainer(height, radius-(thickness*2+$interf));
+    //      make_retainer(height, radius-(thickness*2+$slop));
   }
 
   // THIRD SECTION
   translate([separation, 0, 0])
-    make_section(height, radius - ((thickness * 2 + $interf) * 2), false, true);
+    make_section(height, radius - ((thickness * 2 + $slop) * 2), false, true);
 
   // EYE PIECE
-  translate([separation / 2, separation / 2, height + ($interf * 3) + (thickness * 6)])
+  translate([separation / 2, separation / 2, height + ($slop * 3) + (thickness * 6)])
     rotate([180, 0, 0])
-      make_eye(height, radius - ((thickness * 2 + $interf) * 2));
+      make_eye(height, radius - ((thickness * 2 + $slop) * 2));
 }
 
 half(height * 2, radius, SLICE_IN_HALF) {

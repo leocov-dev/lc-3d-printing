@@ -16,7 +16,7 @@ BRIM_RAD=5;  // in mm
 BRIM_TH=2;  // in mm
 BRIM_EDGE_F=4;
 
-$interf=0.33;  // in mm
+$slop=0.33;  // in mm
 
 WIRE_RAD=4;  // in mm
 WIRE_SEP=30;  // in deg
@@ -64,7 +64,7 @@ module insert_ring() {
 
 
 module insert_plug() {
-  spacing=$interf/sqrt(2);
+  spacing=$slop/sqrt(2);
   totalThickness=DESK_TH+BRIM_TH;
   radius=DESK_HOLE_RAD-RIM_TH-spacing;
   

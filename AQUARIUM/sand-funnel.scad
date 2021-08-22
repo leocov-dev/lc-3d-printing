@@ -2,7 +2,7 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
-$interf = 0.4;
+$slop = 0.4;
 MIN_HEIGHT=10;
 
 module SandFunnel(d1=10, d2=30, h=100, wall=2.5) {

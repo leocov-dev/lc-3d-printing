@@ -3,12 +3,12 @@ include <../lib/lib_screw.scad>
 
 module clamp(d, t, h) {
   od = d+t*2;
-  $interf = (d/2)/10;
-  hinge_i = $interf/10;
+  $slop = (d/2)/10;
+  hinge_i = $slop/10;
   difference() {
     cylinder(d = od, h = h);
     cylinder(d=d, h=h);
-    cube([od, $interf, h], anchor = BOTTOM);
+    cube([od, $slop, h], anchor = BOTTOM);
   }
 
   hinge_d = 6;
@@ -17,7 +17,7 @@ module clamp(d, t, h) {
     union() {
       difference() {
         right(d / 2) cube([(hinge_d / 2) + t + hinge_i, hinge_d, h], anchor = LEFT + BOTTOM);
-        right(d / 2) back((hinge_d / 2)) cube([(hinge_d / 2) + t + hinge_i, (hinge_d / 2) + ($interf / 2), h], anchor =
+        right(d / 2) back((hinge_d / 2)) cube([(hinge_d / 2) + t + hinge_i, (hinge_d / 2) + ($slop / 2), h], anchor =
         LEFT + BOTTOM
         + BACK);
       }
@@ -31,7 +31,7 @@ module clamp(d, t, h) {
     union() {
       difference() {
         right(d / 2) cube([(hinge_d / 2) + t + hinge_i, hinge_d, h], anchor = LEFT + BOTTOM);
-        right(d / 2) fwd((hinge_d / 2)) cube([(hinge_d / 2) + t + hinge_i, (hinge_d / 2) + ($interf / 2), h],
+        right(d / 2) fwd((hinge_d / 2)) cube([(hinge_d / 2) + t + hinge_i, (hinge_d / 2) + ($slop / 2), h],
         anchor =
         LEFT + BOTTOM
         + FRONT);

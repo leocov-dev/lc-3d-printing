@@ -9,7 +9,7 @@ include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
 
-$interf = 0.4;
+$slop = 0.4;
 
 MIN_LIFT = 7.5;
 
@@ -19,7 +19,7 @@ module FluvalAquaskyLifters(lift = 15, rimThickness = 10) {
   lipWidth = 1.5;
 
   footLength = 47;
-  footWidth = rimThickness + $interf;
+  footWidth = rimThickness + $slop;
 
   topLength = footLength + (lipWidth * 2);
 

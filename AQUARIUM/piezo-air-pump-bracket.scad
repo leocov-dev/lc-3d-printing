@@ -1,7 +1,7 @@
 include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 include <../lib/BOSL2/joiners.scad>
-include <../lib/lib_cord_clip.scad>
+include <aqu-suction-cup-pin.scad>
 
 $fn = 50;
 $slop = 0.4;
@@ -53,46 +53,29 @@ module pumpHook(th = 2, tab = 2) {
     }
 }
 
-module UsbAirPumpBracket(thickness = 3, width = 60, height = 60) {
+module PiezoAirPumpBracket(thickness = 3, width = 60, height = 60) {
   bracketW = width;
   bracketTh = thickness;
   bracketH = height;
-
-  union()
-    color("#bebfff") {
-      difference() {
-        diff("remove")
-        cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK){
-          attach(TOP)
-          dovetail(
-          "female",
-          slide = 10,
-          width = 15,
-          height = 8,
-          radius = 1.5,
-          round = true,
-          $tags = "remove"
-          )
-          ;
+  union() {
+    diff("remove") {
+      cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK){
+        down(5)
+        attach(FRONT) {
+          xrot(180)
+          suctionCupPin();
         }
-
-        xflip_copy()
-        left((bracketW / 2) - (bracketTh * 3))
-        yrot(- 90)
-        pumpHook(bracketTh + $slop, bracketTh);
       }
-
-
-      up(bracketH / 5)
-      fwd(bracketTh)
+      fwd(bracketTh / 2)
       xrot(90)
-      cordClip(3.3);
-
-      up(3.3)
-      fwd(bracketTh)
-      xrot(90)
-      cordClip(3.3);
+      zrot(90) {
+        fwd(bracketW / 2)
+        rounding_angled_edge_mask(h = bracketTh * 2, d = bracketW, ang = 90, $tags="remove");
+        back(bracketW / 2)
+        rounding_angled_edge_mask(h = bracketTh * 2, d = bracketW, ang = 90, $tags="remove");
+      }
     }
+  }
 }
 
 module SingleCheckAndRegulate(thickness = 3, width = 60) {
@@ -112,18 +95,7 @@ module SingleCheckAndRegulate(thickness = 3, width = 60) {
 
   color("#ffc490")
     diff("remove"){
-      cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK){
-        attach(BOTTOM)
-        dovetail(
-        "male",
-        slide = bracketTh,
-        width = 15,
-        height = 8,
-        radius = 1.5,
-        round = true
-        );
-      }
-
+      cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK);
       left(bracketW / 4)
       up(bracketH){
         cylinder(d = valveHole * 2, l = valveOffset, orient = FRONT);
@@ -190,12 +162,7 @@ THICKNESS = 3;
 WIDTH = 60;
 HEIGHT = 60;
 
-UsbAirPumpBracket(THICKNESS, WIDTH, HEIGHT);
-
-xflip_copy()
-left((WIDTH / 2) - (THICKNESS * 3))
-yrot(- 90)
-pumpHook(THICKNESS, THICKNESS);
+PiezoAirPumpBracket(THICKNESS, WIDTH, HEIGHT);
 
 up(60)
 SingleCheckAndRegulate(THICKNESS, WIDTH);

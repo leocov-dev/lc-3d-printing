@@ -1,9 +1,10 @@
 include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
+include <aqu-suction-cup-pin.scad>
 
 $fn = 100;
 
-$interf = 0.4;
+$slop = 0.4;
 
 pegLens = [0.5, 2.25, 2.25, 1.5];
 pegHeight = pegLens[0]+pegLens[1]+pegLens[2]+pegLens[3];
@@ -130,13 +131,6 @@ module curvedSection(d, arc, arcRad, wall) {
 
 }
 
-module suctionCupPin() {
-  cylinder(d1=7, d2=7.75, h=pegLens[0], anchor=BOTTOM)
-    attach(TOP) cylinder(d=7.75, h=pegLens[1], anchor=BOTTOM)
-    attach(TOP) cylinder(d=4.8, h=pegLens[2], anchor=BOTTOM)
-    attach(TOP) cylinder(d1=4.8, d2=7.5, h=pegLens[3], anchor=BOTTOM);
-}
-
 module suctionCupMount(d, arc, arcRad, wall) {
   cornerRad = wall / 3;
   width = d + (wall * 2);
@@ -233,7 +227,7 @@ module BendHolder(tubeDia = 5, bendArc = 90, bendRad = 5, wallThickness = 1, end
   }
 }
 
-TUBE_DIA=5.5+$interf;
+TUBE_DIA=5.5+$slop;
 WALL_THICKNESS=0.4*3;
 
 BendHolder(TUBE_DIA, 90, 10, WALL_THICKNESS, 8, true);

@@ -3,7 +3,7 @@ include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
 
-$interf = 0.4;
+$slop = 0.4;
 
 module MasonJarTop(d=100, h=30) {
   lidThickness = 2.4;

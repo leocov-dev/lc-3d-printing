@@ -15,16 +15,16 @@ TH = 2.5;  // mm
 
 OR = OD / 2;
 
-module make($interf = 0) {
+module make($slop = 0) {
   difference() {
     union() {
       translate([0, 0, HEIGHT])
         pco1881_cap(wall = TH);
 
-      cylinder(h = HEIGHT, r = OR + $interf);
+      cylinder(h = HEIGHT, r = OR + $slop);
 
       translate([0, 0, HEIGHT / 2])
-        cylinder(h = HEIGHT / 2, r1 = OR + $interf, r2 = 16.5);
+        cylinder(h = HEIGHT / 2, r1 = OR + $slop, r2 = 16.5);
     }
 
     union() {

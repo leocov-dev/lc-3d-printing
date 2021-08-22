@@ -3,10 +3,10 @@ include <../lib/BOSL2/hull.scad>
 
 $fn = 100;
 
-$interf = 0.05;
+$slop = 0.05;
 TH = 2.5;
 
-W = 127;
+W = 115;
 D = 115;
 H = 76;
 
@@ -52,10 +52,13 @@ module make() {
     }
 
     color("red")
-      fwd(D / 2 - (7 / 2) - 2.5) up(H - 1) left(W / 2) yrot(- 58) down(15)
-      therm_sub();
+      fwd(D / 2 - (7 / 2) - 2.5)
+      up(H - 1)
+      left(W / 2)
+      yrot(- 58)
+      down(15)
+      #therm_sub();
   }
 }
-
 
 make();
