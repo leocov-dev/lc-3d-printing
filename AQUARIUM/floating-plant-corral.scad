@@ -114,7 +114,7 @@ module FloatingPlantCorralEND(height = 50) {
 // RENDER
 
 //front_half()
-!FloatingPlantCorralPIN();
+FloatingPlantCorralPIN();
 
 right((SUPPORT_D/2) + WALL_TH/2) {
   FloatingPlantCorralEND(0);
