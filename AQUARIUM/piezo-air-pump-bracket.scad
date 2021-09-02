@@ -2,56 +2,10 @@ include <../lib/BOSL2/std.scad>
 include <../lib/BOSL2/hull.scad>
 include <../lib/BOSL2/joiners.scad>
 include <aqu-suction-cup-pin.scad>
+include <../lib/lib_cord_clip.scad>
 
 $fn = 50;
-$slop = 0.4;
-
-
-module pumpHook(th = 2, tab = 2) {
-  dia = 30 + 10;
-  supTh = 12;
-
-  module hook() {
-    hookH = 4;
-
-    union() {
-      cube([supTh / 3, hookH, th], anchor = CENTER + LEFT + FRONT);
-
-      right_half()
-      back(hookH)
-      yscale(1 / 2)
-      cylinder(d = supTh - ($slop * 6), h = th, anchor = CENTER);
-    }
-  }
-
-  union()
-    color("#a0e4ff") {
-      zrot(- 90)
-      back((dia / 2) + (supTh * 3) / 2)
-      right(dia / 2 + supTh / 2 + tab) {
-        front_half()
-        difference() {
-          union() {
-            cube([(supTh / 2) + tab + dia / 2, dia + (supTh * 3), th], anchor = CENTER + RIGHT);
-
-            cylinder(d = dia + supTh, h = th, anchor = CENTER);
-          }
-          cylinder(d = dia, h = th, anchor = CENTER);
-
-          left(dia / 2 + (supTh / 2))
-          back((dia + (supTh * 3)) / 4)
-          cube([(supTh / 2) + tab, dia + (supTh * 3), th], anchor = CENTER + RIGHT);
-
-          fwd(dia + supTh + tab / 2)
-          cylinder(d = dia + supTh + tab, h = th, anchor = CENTER);
-        }
-
-        xflip_copy()
-        right(dia / 2)
-        hook();
-      }
-    }
-}
+$slop = .4;
 
 module PiezoAirPumpBracket(thickness = 3, width = 60, height = 60) {
   bracketW = width;
@@ -60,7 +14,7 @@ module PiezoAirPumpBracket(thickness = 3, width = 60, height = 60) {
   union() {
     diff("remove") {
       cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK){
-        down(5)
+        down(10)
         attach(FRONT) {
           xrot(180)
           suctionCupPin();
@@ -75,6 +29,17 @@ module PiezoAirPumpBracket(thickness = 3, width = 60, height = 60) {
         rounding_angled_edge_mask(h = bracketTh * 2, d = bracketW, ang = 90, $tags="remove");
       }
     }
+
+    up(27)
+    left((bracketW/2) - 5)
+    fwd(bracketTh)
+    xrot(90)
+    cordClip(3.3);
+    up(35)
+    left((bracketW/2) - 5)
+    fwd(bracketTh)
+    xrot(90)
+    cordClip(3.3);
   }
 }
 
@@ -96,48 +61,38 @@ module SingleCheckAndRegulate(thickness = 3, width = 60) {
   color("#ffc490")
     diff("remove"){
       cube([bracketW, bracketTh, bracketH], anchor = BOTTOM + BACK);
-      left(bracketW / 4)
-      up(bracketH){
+
+      // ADJ VALVE HOLDER
+      right(bracketW/4)
+      up(bracketH) {
         cylinder(d = valveHole * 2, l = valveOffset, orient = FRONT);
         cylinder(d = valveHole + $slop, l = (valveOffset) * 2, orient = FRONT, $tags = "remove");
 
         down(valveHole)
         fwd(bracketTh)
         {
-          valveSpan=8.5+($slop*2);
-          left(valveSpan/2)
-          cube([2.5, 15, 10], anchor=BACK+TOP){
-            attach(TOP)
-            zrot(-90)
-            right_triangle([15, 10, 2.5], orient = FRONT, anchor = FRONT);
-          }
-          right(valveSpan/2)
-          cube([2.5, 15, 10], anchor=BACK+TOP){
-            attach(TOP)
-            zrot(-90)
-            right_triangle([15, 10, 2.5], orient = FRONT, anchor = FRONT);
-          }
-        }
+          diff("remove") {
+            valveSpan = 8.5 + ($slop * 2);
+            left(valveSpan / 2)
+            cube([2.5, 15, 10], anchor = BACK + TOP){
+              attach(TOP)
+              zrot(- 90)
+              right_triangle([15, 10, 2.5], orient = FRONT, anchor = FRONT);
+            }
+            right(valveSpan / 2)
+            cube([2.5, 15, 10], anchor = BACK + TOP){
+              attach(TOP)
+              zrot(- 90)
+              right_triangle([15, 10, 2.5], orient = FRONT, anchor = FRONT);
+            }
 
-        // CHECK VALVE HOLDER
-        down(checkOffset - (valveHole / 2))
-        fwd(valveOffset + bracketTh)
-        yrot(90)
-        tube(od = checkDia + (smallPartTh * 2) + $slop, id = checkHole + $slop, h = smallPartTh, anchor = BOTTOM)
-        attach(TOP) {
-          tube(od = checkDia + (smallPartTh * 2) + $slop, id = checkDia + $slop, h = checkHeight, anchor = BOTTOM);
-
-          difference() {
-            back(checkDia / 2)
-            cube([checkDia, valveOffset, checkHeight], anchor = CENTER + BOTTOM);
-
-            cylinder(d = checkDia, h = checkHeight);
+            fwd(15)
+            cylinder(h=100, d=20, orient=LEFT, anchor=CENTER+LEFT, $tags="remove");
           }
         }
       }
-
       triH = valveHole;
-
+      xflip()
       up(bracketH + .1) {
         right(bracketW / 2 + .1)
         yrot(180)
@@ -154,6 +109,25 @@ module SingleCheckAndRegulate(thickness = 3, width = 60) {
         right_triangle([(bracketW / 4) - (valveHole), triH, bracketTh * 10], orient = FRONT, anchor = LEFT + FRONT,
         $tags
         = "remove");
+      }
+
+      // CHECK VALVE HOLDER
+      left(bracketW / 4)
+      up(bracketH){
+        down(checkOffset - (valveHole / 2))
+        fwd(valveOffset + bracketTh)
+        yrot(90)
+        tube(od = checkDia + (smallPartTh * 2) + $slop, id = checkHole + $slop, h = smallPartTh, anchor = BOTTOM)
+        attach(TOP) {
+          tube(od = checkDia + (smallPartTh * 2) + $slop, id = checkDia + $slop, h = checkHeight, anchor = BOTTOM);
+
+          difference() {
+            back(checkDia / 2)
+            cube([checkDia, valveOffset, checkHeight], anchor = CENTER + BOTTOM);
+
+            cylinder(d = checkDia, h = checkHeight);
+          }
+        }
       }
     }
 }
