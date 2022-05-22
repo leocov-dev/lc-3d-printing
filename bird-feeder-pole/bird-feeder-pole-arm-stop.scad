@@ -1,4 +1,4 @@
-include <../lib/BOSL2/std.scad>
+include <../_lib/BOSL2/std.scad>
 include <clamp.scad>
 
 $fn = 75;

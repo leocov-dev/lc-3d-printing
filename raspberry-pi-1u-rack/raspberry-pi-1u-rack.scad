@@ -1,6 +1,6 @@
-use <../lib/lib_utils.scad>
-use <../lib/lib_fan.scad>
-include <../lib/BOSL2/std.scad>
+use <../_lib/lib_utils.scad>
+use <../_lib/lib_fan.scad>
+include <../_lib/BOSL2/std.scad>
 
 $fn = 50;
 H_1u = 44;  // 1u is 44.45mm
@@ -135,6 +135,6 @@ module reference() {
 }
 
 module pi(ver = 4) {
-  if (ver == 4) {translate([- 28, 42.5, 1.5]) rotate([0, 0, - 90]) color("grey") import("../lib/ref/pi4.stl");}
-  else if (ver == 3) {rotate([0, 0, - 90]) color("darkgrey") import("../lib/ref/pi3.stl");}
+  if (ver == 4) {translate([- 28, 42.5, 1.5]) rotate([0, 0, - 90]) color("grey") import("../_lib/ref/pi4.stl");}
+  else if (ver == 3) {rotate([0, 0, - 90]) color("darkgrey") import("../_lib/ref/pi3.stl");}
 }

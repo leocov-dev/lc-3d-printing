@@ -2,10 +2,10 @@
 
 set -e
 
-wDir=$(dirname "${BASH_SOURCE[0]}")
+__repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit; pwd)"
 
 function build() {
-   make -C "$wDir/../_util/go-scad-render"
+   make -C "${__repo}/vendor/go-scad-render"
    echo "Build Complete!"
    echo
 }
@@ -14,11 +14,10 @@ if [[ ${BUILD:-"false"} == "true" ]]; then
    build
 fi
 
-scad_render_cmd="$wDir/../_util/go-scad-render/bin/scad-render"
+render_cmd="${__repo}/vendor/go-scad-render/bin/go-scad-render"
 
-if [[ ! -f "$scad_render_cmd" ]]; then
+if [[ ! -f "$render_cmd" ]]; then
   build
 fi
 
-# shellcheck disable=SC2068
-$scad_render_cmd $@
+$render_cmd "${@}"

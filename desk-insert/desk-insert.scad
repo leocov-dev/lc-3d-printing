@@ -1,4 +1,4 @@
-include <../lib/lib_utils.scad>
+include <../_lib/lib_utils.scad>
 ///////////////////////////////////////////////////////////
 // insert for desks with wire retention
 //

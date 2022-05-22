@@ -1,9 +1,0 @@
-# builds
-/bin/
-/dist/
-
-# PyCharm
-.idea/
-
-# tests
-coverage.txt

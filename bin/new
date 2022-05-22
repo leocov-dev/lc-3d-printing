@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+__repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit; pwd)"
+
+__project_name=$*
+
+if [[ -z "${__project_name}" ]]; then
+  echo "Must supply project name..."
+  echo "$ bin/new <project name>"
+  exit 1
+fi
+
+__project_name="${__project_name// /-}"
+__project_dir="${__repo}/${__project_name}"
+
+if [[ -d "${__project_dir}" ]]; then
+  echo "Project already exists: ${__project_name}"
+  echo "Choose a new name..."
+  exit 1
+fi
+
+echo -n "Making project: ${__project_name}... "
+
+mkdir "${__project_dir}"
+mkdir "${__project_dir}/stl"
+touch "${__project_dir}/${__project_name}.scad"
+
+echo "Done!"

@@ -1,5 +1,5 @@
-include <../lib/BOSL2/std.scad>
-include <../lib/BOSL2/hull.scad>
+include <../_lib/BOSL2/std.scad>
+include <../_lib/BOSL2/hull.scad>
 include <aqu-suction-cup-pin.scad>
 
 

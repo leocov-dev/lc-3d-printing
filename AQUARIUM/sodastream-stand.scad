@@ -1,5 +1,5 @@
-include <../lib/BOSL2/std.scad>
-include <../lib/BOSL2/hull.scad>
+include <../_lib/BOSL2/std.scad>
+include <../_lib/BOSL2/hull.scad>
 
 $fn = 100;
 $slop = 1.0;

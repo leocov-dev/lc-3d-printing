@@ -4,8 +4,8 @@
 * Customize the `rimThickness` paramter to match your aquarium rim (values in mm).
 */
 
-include <../lib/BOSL2/std.scad>
-include <../lib/BOSL2/hull.scad>
+include <../_lib/BOSL2/std.scad>
+include <../_lib/BOSL2/hull.scad>
 
 $fn = 100;
 

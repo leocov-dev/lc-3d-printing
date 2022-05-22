@@ -1,8 +1,8 @@
-include <../lib/BOSL2/std.scad>
-include <../lib/BOSL2/hull.scad>
-include <../lib/BOSL2/joiners.scad>
+include <../_lib/BOSL2/std.scad>
+include <../_lib/BOSL2/hull.scad>
+include <../_lib/BOSL2/joiners.scad>
 include <aqu-suction-cup-pin.scad>
-include <../lib/lib_cord_clip.scad>
+include <../_lib/lib_cord_clip.scad>
 
 $fn = 50;
 $slop = .4;

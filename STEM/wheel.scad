@@ -1,5 +1,5 @@
-use <../lib/lib_utils.scad>
-include <../lib/BOSL2/std.scad>
+use <../_lib/lib_utils.scad>
+include <../_lib/BOSL2/std.scad>
 
 $fn = 100;
 

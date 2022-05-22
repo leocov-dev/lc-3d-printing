@@ -1,6 +1,6 @@
-[submodule "lib/BOSL"]
-	path = lib/BOSL
-	url = git@github.com:revarbat/BOSL.git
-[submodule "lib/BOSL2"]
-	path = lib/BOSL2
+[submodule "_lib/BOSL2"]
+	path = _lib/BOSL2
 	url = git@github.com:revarbat/BOSL2.git
+[submodule "vendor/go-scad-render"]
+	path = vendor/go-scad-render
+	url = git@github.com:leocov-dev/go-scad-render

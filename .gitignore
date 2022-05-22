@@ -1,6 +1,8 @@
 .idea/
 
 *.stl
-!lib/ref/pi*.stl
+!_lib/ref/pi*.stl
 *.gcode
 *.3mf
+
+_PRINT/

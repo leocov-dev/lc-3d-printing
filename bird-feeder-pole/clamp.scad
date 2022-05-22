@@ -1,5 +1,5 @@
-include <../lib/BOSL2/std.scad>
-include <../lib/lib_screw.scad>
+include <../_lib/BOSL2/std.scad>
+include <../_lib/lib_screw.scad>
 
 module clamp(d, t, h) {
   od = d+t*2;
