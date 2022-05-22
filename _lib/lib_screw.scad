@@ -1,4 +1,4 @@
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 module screw(hole_d, hole_l, nut, cap) {
   cylinder(d = hole_d, h = hole_l * 2, anchor = CENTER, orient = RIGHT, $fn=100);

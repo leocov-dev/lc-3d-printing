@@ -1,4 +1,4 @@
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 module cordClip(d = 3, offset = 0) {
   MIN_WALL = 3.25;

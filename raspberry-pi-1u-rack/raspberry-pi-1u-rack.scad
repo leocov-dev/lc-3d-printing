@@ -1,6 +1,6 @@
 use <../_lib/lib_utils.scad>
 use <../_lib/lib_fan.scad>
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 $fn = 50;
 H_1u = 44;  // 1u is 44.45mm

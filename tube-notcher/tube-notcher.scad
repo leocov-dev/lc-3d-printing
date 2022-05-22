@@ -1,4 +1,4 @@
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 // fitment ajuster
@@ -26,6 +26,7 @@ module tube_notcher(od_main, od_target, angle) {
   template_height = (adj_ang_to_hyp(TARGET / 2, ANGLE) + little_extra) + (0.75 * 25.4);
 
   up(template_height)
+  zrot(180)
   yrot(ANGLE + 90)
   diff("sub") {
     yrot(ANGLE) {

@@ -1,4 +1,4 @@
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 

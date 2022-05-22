@@ -1,5 +1,5 @@
 use <../_lib/lib_utils.scad>
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 $slop = 0.4;

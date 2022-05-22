@@ -1,4 +1,4 @@
-include <../_lib/BOSL2/std.scad>
+include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 $slop = 0.2;
@@ -7,36 +7,33 @@ WALL_THICKNESS = 4;
 
 
 module pinAligner(w, l, th, pinDia, pinSpacing) {
-  tags("keep") {
-    diff("hole") {
-      cuboid(
-        [w, l, th],
-      rounding = th / 4,
-      edges = [FRONT + LEFT, BACK + LEFT, BACK + RIGHT],
-      anchor = BOTTOM
-      );
+  diff("hole") {
+    cuboid(
+      [w, l, th],
+    rounding = th / 4,
+    edges = [FRONT + LEFT, BACK + LEFT, BACK + RIGHT],
+    anchor = BOTTOM
+    );
 
-      yflip_copy()
-      fwd(pinSpacing / 2)
-      cylinder(d = 3.5, h = th * 2, anchor = BOTTOM, $tags = "hole");
-    }
+    yflip_copy()
+    fwd(pinSpacing / 2)
+    down(th / 2)
+    tag("hole") cylinder(d = 3.5, h = th * 2, anchor = BOTTOM);
   }
 
-  cuboid(
-    [w, l, th],
-  rounding = th / 4,
-  edges = [FRONT + LEFT, FRONT + RIGHT, BACK + LEFT, BACK + RIGHT],
-  anchor = BOTTOM,
-  $tags = "sub"
-  );
+
+//  tag("sub")
+  cuboid([w, l, th], rounding = th / 4, edges = [FRONT + LEFT, FRONT + RIGHT, BACK + LEFT, BACK + RIGHT],
+  anchor = BOTTOM);
 }
 
 module socket(h, od, id, hole) {
   down(h - WALL_THICKNESS) {
-    tags("keep") {
+    tag("keep") {
       diff("hole") {
         up(h / 2)
-        cylinder(d = hole, l = od * 2, orient = LEFT, anchor = CENTER, $tags = "hole");
+        tag("hole")
+        cylinder(d = hole, l = od * 2, orient = LEFT, anchor = CENTER);
 
         tube(od = od, id = id, h = h, anchor = BOTTOM);
       }
@@ -57,17 +54,20 @@ module standoff(w, l, th) {
 
   union() {
     diff("sub", keep = "keep") {
+      tag("keep")
       pinAligner(pinAlignerWidth, pinAlignerLength, th, pinAlignerHole, pinSpacing);
 
 
       back(l)
       right(w){
         socket(socketHeight, socketOuter, socketInner, socketScrewHole);
-        cylinder(d = socketOuter - 0.01, h = socketHeight, anchor = BOTTOM, $tags = "sub");
+
+        tag("sub") cylinder(d = socketOuter - 0.01, h = socketHeight, anchor = BOTTOM);
       }
 
       back(l)
-      cube([100, 100, WALL_THICKNESS], anchor = BOTTOM + FRONT, $tags = "sub");
+      tag("sub")
+      cube([100, 100, WALL_THICKNESS], anchor = BOTTOM + FRONT);
 
       back(pinSpacing / 2) {
         union() {
@@ -82,15 +82,16 @@ module standoff(w, l, th) {
         }
       }
 
-      right(w+WALL_THICKNESS)
+      right(w + WALL_THICKNESS)
       back(l)
-      wedge([th, l/1.25, socketOuter - (WALL_THICKNESS/4)], spin=180, orient = LEFT, anchor= RIGHT + FRONT + BOTTOM);
+      wedge([th, l / 1.25, socketOuter - (WALL_THICKNESS / 4)], spin = 180, orient = LEFT, anchor = RIGHT + FRONT +
+        BOTTOM);
     }
 
     up(WALL_THICKNESS)
     right(pinAlignerHole)
-    fwd((pinSpacing/2) + (pinAlignerHole/2))
-    wedge([WALL_THICKNESS, l / 2, socketHeight*1.25], orient = DOWN, anchor = RIGHT + BOTTOM + FRONT);
+    fwd((pinSpacing / 2) + (pinAlignerHole / 2))
+    wedge([WALL_THICKNESS, l / 2, socketHeight * 1.25], orient = DOWN, anchor = RIGHT + BOTTOM + FRONT);
   }
 }
 
@@ -100,9 +101,9 @@ yrot(180) {
   standoff(2.5, 63.5, WALL_THICKNESS);
 
 
-//  xflip_copy()
-//  left(8)
-//  fwd(16)
-//  zrot(180)
-//  standoff(11.5, 79, WALL_THICKNESS);
+  //  xflip_copy()
+  //  left(8)
+  //  fwd(16)
+  //  zrot(180)
+  //  standoff(11.5, 79, WALL_THICKNESS);
 }

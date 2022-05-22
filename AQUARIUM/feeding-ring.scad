@@ -1,5 +1,5 @@
-include <../_lib/BOSL2/std.scad>
-include <../_lib/BOSL2/hull.scad>
+include <../vendor/BOSL2/std.scad>
+include <../vendor/BOSL2/hull.scad>
 include <aqu-suction-cup-pin.scad>
 
 // ALL VALUES IN MILLIMETERS
