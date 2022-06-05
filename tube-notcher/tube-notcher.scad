@@ -2,10 +2,10 @@ include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 // fitment ajuster
-$slop = 0.3;
+$slop = 0.6;
 
 // thickness of the 3d print walls
-WALL_THICKNESS = 2;
+WALL_THICKNESS = 1.2;
 
 MM_CONV = 25.4;
 
@@ -16,17 +16,18 @@ MM_CONV = 25.4;
 //   od_main   - outer diameter of tube to notch     - INCHES
 //   od_target - outer diameter of tube to attach to - INCHES
 //   angle     - angle between tubes (0-85)          - DEGREES
-module tube_notcher(od_main, od_target, angle) {
+module tube_notcher(od_main, od_target, angle, extra=0.75) {
   main_mm = constrain(od_main, 0.1, 100) * MM_CONV;
   target_mm = constrain(od_target, 0.1, 100) * MM_CONV;
+  extra_mm = constrain(extra, 0.25, 2) * MM_CONV;
 
   MAIN = main_mm; //constrain(main_mm, WALL_THICKNESS, target_mm);
   TARGET = od_target * MM_CONV;
   ANGLE = angle-90;
 
   little_extra = adj_ang_to_opp((MAIN / 2) + WALL_THICKNESS, ANGLE);
-  template_height = (adj_ang_to_hyp(TARGET / 2, ANGLE) + little_extra) + (0.75 * MM_CONV);
-  chop = (template_height * 2) + little_extra;
+  template_height = (adj_ang_to_hyp(TARGET / 2, ANGLE) + little_extra) + extra_mm;
+  chop = (template_height * 3) + little_extra;
 
   up(template_height)
   zrot(180)
@@ -42,7 +43,7 @@ module tube_notcher(od_main, od_target, angle) {
       cylinder(d = WALL_THICKNESS / 2, h = template_height, anchor = BOTTOM);
     }
 
-//    #cylinder(d = TARGET, h = chop, anchor = CENTER, orient = LEFT);
+    #cylinder(d = TARGET, h = chop, anchor = CENTER, orient = LEFT);
     tag("sub"){
       cylinder(d = TARGET, h = chop, anchor = CENTER, orient = LEFT);
       cube([chop, MAIN + TARGET, template_height * 2], anchor = TOP);
@@ -81,4 +82,4 @@ module tube_notcher(od_main, od_target, angle) {
 //  stroke(pathA, color="lightgreen");
 }
 
-tube_notcher(25.6/MM_CONV, 42/MM_CONV*500, 110);
+tube_notcher(25.6/MM_CONV, 42/MM_CONV*500, 180-110, 0.75);
