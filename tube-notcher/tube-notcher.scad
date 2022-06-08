@@ -2,7 +2,7 @@ include <../vendor/BOSL2/std.scad>
 
 $fn = 100;
 // fitment ajuster
-$slop = 0.6;
+$slop = 1.2;
 
 // thickness of the 3d print walls
 WALL_THICKNESS = 1.2;
