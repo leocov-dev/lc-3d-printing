@@ -6,3 +6,5 @@
 *.3mf
 
 _PRINT/
+
+out/

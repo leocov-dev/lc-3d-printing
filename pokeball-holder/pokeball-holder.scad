@@ -35,7 +35,7 @@ module pokeball_holder_clip(diameter, belt_width, belt_thickness) {
       xrot(- 90)
       grid2d(size = [CLIP_W - (belt_thickness * 2), CLIP_H - (belt_thickness * 2)], n = [5, 6], stagger = "alt")
       top_half()
-      sphere(r = belt_thickness / 4);
+      sphere(r = belt_thickness / 3);
 
       CURVE_OR = 400;
       diff("clip") {
@@ -48,25 +48,26 @@ module pokeball_holder_clip(diameter, belt_width, belt_thickness) {
       }
 
       back(belt_thickness)
-      up((CLIP_H/4) - (CLIP_H/12))
+      up((CLIP_H / 4) - (CLIP_H / 12))
       xrot(90)
       grid2d(size = [CLIP_W - (belt_thickness * 2), (CLIP_H / 2) - (belt_thickness * 2)], n = [5, 3], stagger = "alt")
       top_half()
-      sphere(r = belt_thickness / 3.5);
+      sphere(r = belt_thickness / 3);
 
       //      down(belt_thickness / 2)
       //      back(belt_thickness)
       //      cuboid([CLIP_W, WALL_THICKNESS, CLIP_H + belt_thickness], anchor = CENTER + FRONT);
 
-      down((CLIP_H/2) + 3.5)
-      back(belt_thickness-1.9)
+      down((CLIP_H / 2) + 3.5)
+      back(belt_thickness - 1.9)
       cylinder(h = CLIP_W, d = belt_thickness, orient = RIGHT, anchor = CENTER + BACK + LEFT);
 
       up(CLIP_H / 4)
       fwd(WALL_THICKNESS)
       xrot(90)
       zrot(90)
-      dovetail("male", w = WALL_THICKNESS * 4, h = WALL_THICKNESS, slide = CLIP_W, taper = 1, radius = 0.2, round =
+      dovetail("male", w = (WALL_THICKNESS * 4) + .85, h = WALL_THICKNESS + .2, slide = CLIP_W, taper = 1, radius = 0.2,
+      round =
       true, anchor = BOTTOM);
     }
   }
@@ -135,7 +136,7 @@ module pokeball_holder() {
   }
 }
 
-pokeball_holder();
-//pokeball_holder_clip(BALL_DIAMETER, BELT_WIDTH, BELTH_THICKNESS);
+//pokeball_holder();
+pokeball_holder_clip(BALL_DIAMETER, BELT_WIDTH, BELTH_THICKNESS);
 
 
