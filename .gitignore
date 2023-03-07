@@ -1,7 +1,7 @@
 .idea/
 
-*.stl
-!_lib/ref/pi*.stl
+.DS_Store
+
 *.gcode
 *.3mf
 

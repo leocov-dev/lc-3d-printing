@@ -1,6 +1,6 @@
-[submodule "vendor/go-scad-render"]
-	path = vendor/go-scad-render
+[submodule "go-scad-render"]
+	path = go-scad-render
 	url = git@github.com:leocov-dev/go-scad-render
-[submodule "vendor/BOSL2"]
-	path = vendor/BOSL2
+[submodule "projects/_vendor/BOSL2"]
+	path = projects/_vendor/BOSL2
 	url = git@github.com:revarbat/BOSL2.git
