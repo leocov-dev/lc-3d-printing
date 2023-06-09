@@ -4,7 +4,11 @@
 
 *.gcode
 *.3mf
+*.stl
+*.obj
 
 _PRINT/
 
 out/
+
+..bfg-report/
